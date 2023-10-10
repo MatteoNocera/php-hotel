@@ -53,9 +53,19 @@ $hotels = [
 
 //var_dump($hotels);
 
-/* foreach ($hotels as $key => $hotel) {
-    var_dump($hotel);
-} */
+$vote = $_GET['vote_ranking'];
+$parking = $_GET['parking_chose'];
+
+
+if ($parking === 'yes') {
+    var_dump('yes P');
+} elseif ($parking === 'no') {
+    var_dump('no P');
+} else {
+    var_dump('all');
+}
+
+
 
 ?>
 
@@ -74,9 +84,35 @@ $hotels = [
 
 <body>
     <div class="container">
+        <form action="" method="GET">
 
 
 
+            <div class="col-md-4">
+
+
+                <label for="parking_chose">Do you want hotel with parking?</label>
+                <select id="parking_chose" name="parking_chose" class="form-select mb-3" aria-label="Default select example">
+                    <option value="" selected></option>
+                    <option value="yes">yes</option>
+                    <option value="no">no</option>
+                </select>
+
+                <label for="vote_rating">Select vote ranking</label>
+                <select id="vote_rating" name="vote_rating" class="form-select mb-3" aria-label="Default select example">
+                    <option value="" selected></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+
+
+        </form>
 
 
         <table class="table">
@@ -94,9 +130,9 @@ $hotels = [
             <?php foreach ($hotels as $key => $hotel) : ?>
 
 
-
                 <tbody>
                     <tr>
+
 
                         <th scope="row"><?= $key + 1 ?></th>
                         <td><?= $hotel['name'] ?></td>
@@ -115,6 +151,14 @@ $hotels = [
 
                         <td><?= $hotel['vote'] ?></td>
                         <td><?= $hotel['distance_to_center'] . ' km' ?></td>
+
+
+
+
+
+
+
+
 
                     </tr>
 
