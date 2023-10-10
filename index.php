@@ -53,9 +53,9 @@ $hotels = [
 
 //var_dump($hotels);
 
-foreach ($hotels as $key => $hotel) {
+/* foreach ($hotels as $key => $hotel) {
     var_dump($hotel);
-}
+} */
 
 ?>
 
@@ -73,6 +73,56 @@ foreach ($hotels as $key => $hotel) {
 </head>
 
 <body>
+    <div class="container">
+
+
+
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col"> Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Parking</th>
+                    <th scope="col">Vote</th>
+                    <th scope="col">Distance to Center</th>
+                </tr>
+            </thead>
+
+            <?php foreach ($hotels as $key => $hotel) : ?>
+
+
+
+                <tbody>
+                    <tr>
+
+                        <th scope="row"><?= $key + 1 ?></th>
+                        <td><?= $hotel['name'] ?></td>
+                        <td><?= $hotel['description'] ?></td>
+
+                        <td>
+                            <?php
+                            if ($hotel['parking'] === true) :
+                                echo 'Yes';
+                            else :
+                                echo 'No';
+
+                            endif;
+                            ?>
+                        </td>
+
+                        <td><?= $hotel['vote'] ?></td>
+                        <td><?= $hotel['distance_to_center'] . ' km' ?></td>
+
+                    </tr>
+
+                </tbody>
+            <?php endforeach; ?>
+        </table>
+
+    </div>
 
 </body>
 
