@@ -50,3 +50,9 @@ $hotels = [
     ],
 
 ];
+
+//var_dump($hotels);
+
+foreach ($hotels as $key => $hotel) {
+    var_dump($hotel);
+}
