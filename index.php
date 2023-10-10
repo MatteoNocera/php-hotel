@@ -53,8 +53,10 @@ $hotels = [
 
 //var_dump($hotels);
 
-$vote = $_GET['vote_ranking'];
+$vote = (isset($_GET['vote_ranking']) && $_GET['vote_ranking'] > 0) ? $_GET['vote_ranking'] : false;
 $parking = $_GET['parking_chose'];
+
+var_dump($vote);
 
 
 if ($parking === 'yes') {
@@ -65,7 +67,31 @@ if ($parking === 'yes') {
     var_dump('all');
 }
 
+foreach ($hotels as $hotel) {
 
+    if ($parking === 'yes') {
+
+        if ($hotel['parking'] && ($vote && $hotel['vote'] >= $vote)) {
+            $filtered_hotels[] = $hotel; // filtrati per voto e parking
+        } elseif ($hotel['parking']) {
+            $filtered_hotels[] = $hotel; // solo parking
+        }
+    } elseif ($parking === 'no') {
+
+        if ($hotel['parking'] == false && ($vote && $hotel['vote'] >= $vote)) {
+            $filtered_hotels[] = $hotel; // senza parking, con voto
+        } elseif ($hotel['parking'] == false) {
+            $filtered_hotels[] = $hotel; // senza parking
+        }
+    } else {
+        // senza parking
+        if ($vote && $hotel['vote'] >= $vote) {
+            $filtered_hotels[] = $hotel; // parking indifferente e voto
+        } else {
+            $filtered_hotels[] = $hotel; // tutto
+        }
+    }
+}
 
 ?>
 
@@ -127,7 +153,7 @@ if ($parking === 'yes') {
                 </tr>
             </thead>
 
-            <?php foreach ($hotels as $key => $hotel) : ?>
+            <?php foreach ($filtered_hotels as $key => $hotel) : ?>
 
 
                 <tbody>
@@ -163,6 +189,7 @@ if ($parking === 'yes') {
                     </tr>
 
                 </tbody>
+
             <?php endforeach; ?>
         </table>
 
